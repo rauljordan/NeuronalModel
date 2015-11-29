@@ -1,25 +1,20 @@
-% ---------------------- Starter m-file for HW-8a -----------------------
-% ---------------------- RAUL EDUARDO JORDAN ES53 -----------------------
-
-%-------------------------------  Problem 1  ----------------------------
-
 % The equations below are from the Hodgkin-Huxley model (note that the paramaters
 % are such that the units for membrane voltage are millivolts (mV)).
 
-v=[-100:.1:50]';                            % make a column vector for v=v_mem  
-a_m  = -0.1*(40+v)./(exp(-(40+v)/10)-1);    % a & b are intermediate variables                
+v=[-100:.1:50]';                            % make a column vector for v=v_mem
+a_m  = -0.1*(40+v)./(exp(-(40+v)/10)-1);    % a & b are intermediate variables
 b_m  = 4*exp(-(v+65)/18);
 m_inf = a_m./(a_m+b_m);  % m_inf = "m-infinity" = the asymptotic value of m
 
 m_inf_3 = m_inf.^3
 
-a_h  = 0.07*exp(-(v+65)/20);                               
+a_h  = 0.07*exp(-(v+65)/20);
 b_h  = 1./(exp(-(35+v)/10)+1);
 h_inf = a_h./(a_h+b_h);% h_inf = "h-infinity" = the asymptotic value of h
 
 m3_h_inf = (m_inf.^3).*h_inf;
 
-a_n  = -0.01*(55+v)./(exp(-(55+v)/10)-1);                   
+a_n  = -0.01*(55+v)./(exp(-(55+v)/10)-1);
 b_n  = 0.125*exp(-(v+65)/80);
 n_inf = a_n./(a_n+b_n);% n_inf = "n-infinity" = the asymptotic value of n
 
@@ -34,26 +29,26 @@ ylabel('Gating Probability')
 
 %----------------------------  Problems 2 & 3  ----------------------------
 
-% make sure that you look at y.a, y.b, etc, that are displayed in the MATLAB command window when this code 
+% make sure that you look at y.a, y.b, etc, that are displayed in the MATLAB command window when this code
 % is run, as this text display shows the solutions to the differential equations we're defining below.
 
 % 1-step reaction kinetics
-y = dsolve('Da = -k*a', 'a(0) = 1', 'Db = k*a', 'b(0) = 0', 't'); 
-disp('kinetics for 1-step rxn:'); disp(y.a); disp(y.b); 
-k=2; t=[0:.001:4]'; 
-figure; 
-subplot(2,1,1); plot(t,1./exp(k*t)); 
+y = dsolve('Da = -k*a', 'a(0) = 1', 'Db = k*a', 'b(0) = 0', 't');
+disp('kinetics for 1-step rxn:'); disp(y.a); disp(y.b);
+k=2; t=[0:.001:4]';
+figure;
+subplot(2,1,1); plot(t,1./exp(k*t));
 subplot(2,1,2); plot(t,1 - 1./exp(k*t));
 ylabel_list = {'a(t)','b(t)'};
 for k=1:2, subplot(2,1,k); xlabel('Time'); ylabel(ylabel_list{k}); ylim([0 1]); end
 subplot(2,1,1); title('Reactions kinetics for a --> b')
 
 % 2-step reaction kinetics
-y = dsolve('Da = -k*a', 'a(0) = 1', 'Db = k*a-k*b', 'b(0) = 0','Dc = k*b', 'c(0)=0','t'); 
-disp('kinetics for 2-step rxn:'); disp(y.a); disp(y.b); disp(y.c) 
-k=2; t=[0:.001:4]'; 
-figure; 
-subplot(3,1,1); plot(t,1./exp(k*t)); 
+y = dsolve('Da = -k*a', 'a(0) = 1', 'Db = k*a-k*b', 'b(0) = 0','Dc = k*b', 'c(0)=0','t');
+disp('kinetics for 2-step rxn:'); disp(y.a); disp(y.b); disp(y.c)
+k=2; t=[0:.001:4]';
+figure;
+subplot(3,1,1); plot(t,1./exp(k*t));
 subplot(3,1,2); plot(t,(k*t)./exp(k*t));
 subplot(3,1,3); plot(t,1 - (k*t)./exp(k*t) - 1./exp(k*t));
 ylabel_list = {'a(t)','b(t)','c(t)'};
@@ -106,12 +101,3 @@ xlabel('time in ms')
 plot(t,v,'r');
 
 hold off;
-
-
-
-
-
-
-
-
-

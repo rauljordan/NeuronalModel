@@ -1,4 +1,4 @@
-function dpdt = hod_hux(t,p)
+function dpdt = HodgkinHuxley(t,p)
 % this function contains the diff eqs that define the Hodgkin-Huxley model.
 % p is the state vector containing v,m,h,n and I_injected (in that order)
 
@@ -7,8 +7,8 @@ GNa = 120;    % GNa = the max possible value of gNa (mS)
 GK = 36;      % GK = the max possible value of gK
 GL = 0.3;     % the "leakage" current
 VNa = 55;     % Nernst potential for Na (mv)
-VK = -72;     % Nernst potential for K 
-VL = -50;     % Nernst potential for "leakage" - somewhat of a hack 
+VK = -72;     % Nernst potential for K
+VL = -50;     % Nernst potential for "leakage" - somewhat of a hack
 C = 1;        % Membrane capacitance (uF/cm^2)
 
 [v,m,h,n,I] = deal(p(1),p(2),p(3),p(4),p(5));  %extract individual state variables from p
